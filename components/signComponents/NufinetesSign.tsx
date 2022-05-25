@@ -1,14 +1,16 @@
 import { useEffect } from 'react'
-import { hooks, metaMask } from '../../connectors/metaMask'
+import { hooks, nufinetes } from '../../connectors/nufinetes'
 import { Accounts } from '../Accounts'
 import { Card } from '../Card'
 import { Chain } from '../Chain'
 import { ConnectWithSelect } from '../ConnectWithSelect'
 import { Status } from '../Status'
+import PersonalSign from './PersonalSign'
+import SignTypedDataV4 from './SignTypedDataV4'
 
-const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider, useENSNames } = hooks
+const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider } = hooks
 
-export default function MetaMaskCard() {
+export default function NefinetesCard() {
   const chainId = useChainId()
   const accounts = useAccounts()
   const error = useError()
@@ -17,40 +19,33 @@ export default function MetaMaskCard() {
   const isActive = useIsActive()
 
   const provider = useProvider()
-  const ENSNames = useENSNames(provider)
-
+  // const ENSNames = useENSNames(provider)
   // attempt to connect eagerly on mount
   useEffect(() => {
-    void metaMask.connectEagerly()
+    void nufinetes.connectEagerly()
   }, [])
-
-  const handleSendRequest = () => {
-    const msgParams = ['Example `personal_sign` message', accounts[0]]
-    console.log(
-      (provider.provider as any).request,
-      (provider.provider as any).request({ method: 'personal_sign', params: msgParams }).then((res) => console.log(res))
-    )
-  }
 
   return (
     <Card>
       <div>
-        <b>MetaMask</b>
+        <b>Nufinetes</b>
         <Status isActivating={isActivating} error={error} isActive={isActive} />
         <div style={{ marginBottom: '1rem' }} />
         <Chain chainId={chainId} />
-        <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
+        <Accounts accounts={accounts} />
       </div>
       <div style={{ marginBottom: '1rem' }} />
       <ConnectWithSelect
-        connector={metaMask}
+        connector={nufinetes}
         chainId={chainId}
         isActivating={isActivating}
         error={error}
+        selectable={false}
         isActive={isActive}
       />
-      <button onClick={() => console.log(provider)}>Check provider</button>
-      <button onClick={handleSendRequest}>SIGN</button>
+
+      <PersonalSign account={accounts?.[0]} provider={provider?.provider} type="nufinetes" />
+      <SignTypedDataV4 account={accounts?.[0]} provider={provider?.provider} type="nufinetes" />
     </Card>
   )
 }

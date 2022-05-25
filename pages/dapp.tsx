@@ -1,7 +1,7 @@
 import { Web3ReactHooks, Web3ReactProvider } from '@web3-react/core'
 import Header from '../components/Header'
 import { AccountProvider } from '../components/AccountProvider'
-import Dapp from '../components/Dapp'
+import Dapp from '../components/dappComponents/Dapp'
 
 import { MetaMask } from '@web3-react/metamask'
 import { NufinetesConnector } from '@vimworldinc/nufinetes-link'

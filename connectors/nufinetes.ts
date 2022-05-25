@@ -7,5 +7,5 @@ export const [nufinetes, hooks] = initializeConnector<NufinetesConnector>(
     new NufinetesConnector(actions, {
       rpc: [],
     }),
-  [818000000, 818000001]
+  [1, 2, 3, 4, 42, 818000000, 818000001]
 )

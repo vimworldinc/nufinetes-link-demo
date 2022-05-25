@@ -254,7 +254,7 @@ export class VeWalletConnector extends Connector {
     // await this.provider?.disconnect()
     // this.provider?.killSession()
     if (this.provider.connected) {
-      this.provider.killSession()
+      this.provider?.killSession()
     }
     this.provider = undefined
     this.eagerConnection = undefined

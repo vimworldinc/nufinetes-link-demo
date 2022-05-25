@@ -80,7 +80,6 @@ export const AccountProvider = ({ children }: { children: ReactNode }) => {
           },
         ],
       }
-      console.log(provider, 'check provider')
       const walletSignRes = await (provider as any).sendCustomRequest(signParams)
       return walletSignRes
     } catch (error) {
