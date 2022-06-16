@@ -1,46 +1,210 @@
-# Getting Started with Create React App
+# Nufinetes-Link Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Version 1.0
 
-## Available Scripts
+这是一个用来展示 Nufinetes-Link sdk 用法的 demo 合集, 目前提供了 5 个页面, 分别是:
 
-In the project directory, you can run:
+1. 多钱包链接示例与原生 Web3Provider 使用示例
+2. 扩展 provider 和多账户登录模拟 demo
+3. Eth 签名示例(PersonalSign 和 SignTypedData_v4)
+4. Eth kovan testnet 下的合约调用
+5. Vechain testnet 下的合约调用
 
-### `npm start`
+关于 Nufinetes-Link 的使用介绍, 请参考 [Nufinetes-Link](https://github.com/vimworldinc/nufinetes-link)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+在这里我们将介绍 Eth Kovan testnet 和 Vechain testnet 下合约调用相关的使用方法
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Eth Contract Call
 
-### `npm test`
+### Get native token balance
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+// useAccount 和 useProvider 都是 web3react 标准的 hooks
+const account = useAccount();
+const provider = useProvider();
 
-### `npm run build`
+const getNativeTokenBalance = async (account, provider): Promise<number> => {
+  try {
+    if (!account || !provider) {
+      return;
+    }
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    // nufineates-link 提供的 provider 是一个扩展了 wallet connect 相关功能的 web3 provider, 它可以直接调用相关 web3 provider 方法
+    const _balance = await provider.getBalance(account);
+    if (+_balance || +_balance === 0) {
+      return +formatUnits(_balance, 18);
+    }
+    return 0;
+  } catch (error) {
+    throw error;
+  }
+};
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Get Erc20 token balance and approve amount
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+const accounts = useAccounts();
 
-### `npm run eject`
+const handleBalanceAndApprove = async () => {
+  // 我们通过调用 provider 上的 getSigner 方法来获取初始化合约 (ethers 方法) 需要的 signer
+  // 这里我们使用了 kovan 上 link 的合约进行演示
+  const contract = new Contract(Link_Addr, ERC20_ABI, provider.getSigner());
+  const _balance = await contract.balanceOf(accounts[0]);
+  const _decimals = await contract.decimals();
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  setLinkBalance(+formatUnits(_balance, _decimals));
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  const addressApprowed = await contract.allowance(accounts[0], Mock_Contract, {
+    gasLimit: 1000000,
+  });
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  setApprovedAmount(Number(addressApprowed));
+};
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Make a contract call for approve
 
-## Learn More
+```jsx
+const getApprove = async () => {
+  // 依然是生成一个合约实例
+  const contract = new Contract(Link_Addr, ERC20_ABI, provider.getSigner());
+  const tx = await contract.approve(Mock_Contract, APPROVE_AMOUNT, {});
+  setTxHash(tx.hash);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  const receipt = await tx.wait();
+  console.log(receipt, "receipt result");
+};
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+如同上面所展示的, 你可以将 Nufinetes-Link 提供的 provider 当成一个具备完整功能的 web3 provider 来使用, 而之后相关合约的操作, 与你使用 MetaMask 或者其他 evm 兼容钱包所提供的 web3 provider 时别无二致.
+
+不过 Nufinetes-Link 提供的 provider 不仅仅是一个 web3-provider, 它还同时是一额 Wallet Connect 链接实例, 接下来我们会介绍这一部分的特性
+
+## Vechain Contract Call
+
+在 Vechain 下, 我们需要借助 connex 来进行合约交互
+
+```jsx
+import Connex from "@vechain/connex";
+
+// 初始化 testnet 下的 connex 实例
+const connex = new Connex({
+  node: "https://testnet.veblocks.net/", // veblocks public node, use your own if needed
+  network: "test", // defaults to mainnet, so it can be omitted here
+});
+```
+
+### Get balance of Veed
+
+```jsx
+  const balanceOfVeed = async () => {
+      // declare the balanceOf abi
+      const balanceOfABI = {
+          constant: true,
+          inputs: [{name: '_owner', type: 'address'}],
+          name: 'balanceOf',
+          outputs: [{name: 'balance', type: 'uint256'}],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function',
+      }
+
+      // make a contract instance by thor.account method
+      const acc = connex.thor.account(Veed_Addr)
+      // select the balanceOf method by balanceOfAbi
+      const method = acc.method(balanceOfABI)
+      // make the contract call
+      const result = await method.call(accounts[0])
+
+      // after decode the contract call result, we can get the Veed balance of your current Nufinetes account
+      const fnABI = new Devkit.abi.Function(balanceOfABI as Devkit.abi.Function.Definition)
+      const balanceRes = fnABI.decode(result.data)
+      setVeedBalance(balanceRes.balance / 1e18)
+   }
+```
+
+如上面所展示的, 我们只需要 Nufinetes-Link 所提供的 account 字段来传入相关合约实例进行调用, 接下来的发送合约转账请求会有一些不同
+
+### Transfer veed to a target account
+
+```jsx
+const transferVeed = async () => {
+  if (!amountValue || Number.isNaN(+amountValue)) {
+    alert("Please input number");
+    return;
+  } else if (!address) {
+    alert("Please input receiver address");
+    return;
+  }
+
+  const transferABI = {
+    constant: false,
+    inputs: [
+      { name: "_to", type: "address" },
+      { name: "_amount", type: "uint256" },
+    ],
+    name: "transfer",
+    outputs: [{ name: "success", type: "bool" }],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  };
+
+  // transfer input amount to BigInt
+  const big = BigInt(parseFloat(amountValue) * Math.pow(10, 18));
+
+  const params = [address, big.toString()];
+
+  // create a clause for contract call
+  const clauseParams = connex.thor
+    .account(Veed_Addr)
+    .method(transferABI)
+    .asClause(...params);
+  const clause = [{ comment: `Transfer ${amountValue} VEED`, ...clauseParams }];
+
+  // get transaction result by contractRequest function
+  const transactionRes = await contractRequest({
+    address: accounts[0].toLocaleLowerCase(),
+    comment: `Transfer ${amountValue} VEED`,
+    clauseList: clause,
+  });
+
+  if (transactionRes && transactionRes.txid) {
+    setTxHash(transactionRes.txid);
+  }
+};
+```
+
+the contractRequest function will use the Nufinetes-Link provider to make a contract call on Nufinetes
+
+```jsx
+  const contractRequest = async (params): Promise<{ txid: string }> => {
+    const { address, clauseList } = params;
+    try {
+      // create a wallet connect request JSON param
+      const transferTokenJSON = {
+        id: 1,
+        jsonrpc: "2.0",
+        method: "vechain_transaction",
+        params: [
+          clauseList,
+          {
+            broadcast: true,
+            chainId: (provider as WalletConnect).chainId,
+            signer: address,
+          },
+        ],
+      };
+
+      // make a contract call by sendCustomRequest method on WalletConnect instance
+      const res = await (provider as WalletConnect).sendCustomRequest(transferTokenJSON);
+      return res;
+    } catch (error) {
+      console.log({ error });
+      return Promise.reject(error.message || "Payment failed");
+    }
+  };
+```
+
+在 Eth 合约调用的例子里, 我们将 Nufinetes-Link provider 视为一个标准 web3 provider 进行使用. 而在 Vechain 合约调用时, 我们则可以直接将 Nufinetes-Link provider 视为一个 WalletConnect 实例来使用上面的方法
