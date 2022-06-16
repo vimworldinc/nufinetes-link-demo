@@ -41,10 +41,6 @@ export default function NefinetesCard() {
     }, [])
 
     const balanceOfVeed = async () => {
-        if (typeof self === 'undefined') {
-            return
-        }
-
         const balanceOfABI = {
             constant: true,
             inputs: [{name: '_owner', type: 'address'}],
