@@ -2,24 +2,45 @@
 
 ## Version 1.0
 
-这是一个用来展示 Nufinetes-Link sdk 用法的 demo 合集, 目前提供了 5 个页面, 分别是:
+This is a collection of demos used to show the usage of Nufinetes-Link sdk, currently provides 5 pages, they are:
 
-1. 多钱包链接示例与原生 Web3Provider 使用示例
-2. 扩展 provider 和多账户登录模拟 demo
-3. Eth 签名示例(PersonalSign 和 SignTypedData_v4)
-4. Eth kovan testnet 下的合约调用
-5. Vechain testnet 下的合约调用
+1. Multi wallet connection example and native Web3Provider usage example
 
-关于 Nufinetes-Link 的使用介绍, 请参考 [Nufinetes-Link](https://github.com/vimworldinc/nufinetes-link)
+![image](./src/static/nufi-1.png)
 
-在这里我们将介绍 Eth Kovan testnet 和 Vechain testnet 下合约调用相关的使用方法
+#### You can connect with multiple wallets including Nufinetes at the same time, and observe the status of the wallet connections through each wallet panel
+
+![image](./src/static/nufi-2.png)
+
+The native Web3Provider provides multiple states for specific business use
+
+2. Extension provider and multi-account login simulation demo
+
+![image](./src/static/nufi-3.png)
+
+#### Simulate the scenario where Vimworld Dapp needs to obtain tokens after connecting the wallet, and simulate the scenario where multiple wallet accounts log in
+
+3. Eth sign example (PersonalSign 和 SignTypedData_v4)
+
+![image](./src/static/nufi-4.png)
+
+#### Show and compare the results of Nufinetes and MetaMask signing while ensuring that the wallet account used to sign is the same
+
+4. Eth kovan testnet contract call
+5. Vechain testnet contract call
+
+#### The contract call will be described in detail below
+
+For how to use Nufinetes-Link, please refer to [Nufinetes-Link](https://github.com/vimworldinc/nufinetes-link)
+
+Here we will introduce the usage methods related to contract calls under the Eth Kovan testnet and Vechain testnet
 
 ## Eth Contract Call
 
 ### Get native token balance
 
 ```jsx
-// useAccount 和 useProvider 都是 web3react 标准的 hooks
+// useAccount and useProvider are both web3react standard hooks
 const account = useAccount();
 const provider = useProvider();
 
@@ -29,7 +50,7 @@ const getNativeTokenBalance = async (account, provider): Promise<number> => {
       return;
     }
 
-    // nufineates-link 提供的 provider 是一个扩展了 wallet connect 相关功能的 web3 provider, 它可以直接调用相关 web3 provider 方法
+    // The provider provided by nufineates-link is a web3 provider that extends the relevant functions of wallet connect, and it can directly call related web3 provider methods
     const _balance = await provider.getBalance(account);
     if (+_balance || +_balance === 0) {
       return +formatUnits(_balance, 18);
@@ -47,8 +68,8 @@ const getNativeTokenBalance = async (account, provider): Promise<number> => {
 const accounts = useAccounts();
 
 const handleBalanceAndApprove = async () => {
-  // 我们通过调用 provider 上的 getSigner 方法来获取初始化合约 (ethers 方法) 需要的 signer
-  // 这里我们使用了 kovan 上 link 的合约进行演示
+  // We get the signer needed to initialize the contract (ethers method) by calling the getSigner method on the provider
+  // Here we use the Link contract on kovan for demonstration
   const contract = new Contract(Link_Addr, ERC20_ABI, provider.getSigner());
   const _balance = await contract.balanceOf(accounts[0]);
   const _decimals = await contract.decimals();
@@ -67,7 +88,7 @@ const handleBalanceAndApprove = async () => {
 
 ```jsx
 const getApprove = async () => {
-  // 依然是生成一个合约实例
+  // Still generate a contract instance
   const contract = new Contract(Link_Addr, ERC20_ABI, provider.getSigner());
   const tx = await contract.approve(Mock_Contract, APPROVE_AMOUNT, {});
   setTxHash(tx.hash);
@@ -77,18 +98,18 @@ const getApprove = async () => {
 };
 ```
 
-如同上面所展示的, 你可以将 Nufinetes-Link 提供的 provider 当成一个具备完整功能的 web3 provider 来使用, 而之后相关合约的操作, 与你使用 MetaMask 或者其他 evm 兼容钱包所提供的 web3 provider 时别无二致.
+As shown above, you can use the provider provided by Nufinetes-Link as a full-featured web3 provider, and then the operation of related contracts is no different from when you use the web3 provider provided by MetaMask or other evm-compatible wallets.
 
-不过 Nufinetes-Link 提供的 provider 不仅仅是一个 web3-provider, 它还同时是一额 Wallet Connect 链接实例, 接下来我们会介绍这一部分的特性
+However, the provider provided by Nufinetes-Link is not only a web3-provider, but also an instance of Wallet Connect connection. Next, we will introduce the features of this part
 
 ## Vechain Contract Call
 
-在 Vechain 下, 我们需要借助 connex 来进行合约交互
+Under Vechain, we need to use connex for contract interaction
 
 ```jsx
 import Connex from "@vechain/connex";
 
-// 初始化 testnet 下的 connex 实例
+// Initialize the connex instance under testnet
 const connex = new Connex({
   node: "https://testnet.veblocks.net/", // veblocks public node, use your own if needed
   network: "test", // defaults to mainnet, so it can be omitted here
@@ -98,8 +119,9 @@ const connex = new Connex({
 ### Get balance of Veed
 
 ```jsx
+  // We will use Veed contract in this example, the Veed contract we used here is a Vip180 contract, just like an Erc20 contract on Eth chain
   const balanceOfVeed = async () => {
-      // declare the balanceOf abi
+      // declare the balanceOf abi, the abi is a Vip180 abi.
       const balanceOfABI = {
           constant: true,
           inputs: [{name: '_owner', type: 'address'}],
@@ -124,7 +146,7 @@ const connex = new Connex({
    }
 ```
 
-如上面所展示的, 我们只需要 Nufinetes-Link 所提供的 account 字段来传入相关合约实例进行调用, 接下来的发送合约转账请求会有一些不同
+As shown above, we only need the account field provided by Nufinetes-Link to pass in the relevant contract instance to call, and the next contract transfer request will be slightly different
 
 ### Transfer veed to a target account
 
@@ -207,4 +229,8 @@ the contractRequest function will use the Nufinetes-Link provider to make a cont
   };
 ```
 
-在 Eth 合约调用的例子里, 我们将 Nufinetes-Link provider 视为一个标准 web3 provider 进行使用. 而在 Vechain 合约调用时, 我们则可以直接将 Nufinetes-Link provider 视为一个 WalletConnect 实例来使用上面的方法
+In the example of the Eth contract invocation, we use the Nufinetes-Link provider as a standard web3 provider. In the Vechain contract invocation, we can directly treat the Nufinetes-Link provider as a WalletConnect instance to use its methods
+
+============================================================
+
+If you have any questions, please file an issue here: issue link
