@@ -13,14 +13,18 @@ export default function Home() {
       <Header />
 
       <div style={{ fontSize: 18, width: 800, textAlign: "center" }}>
-        多钱包链接示例
+        Multi Wallet Connection
         <br />
-        本示例提供了两个面板用来分别显示 Nufinetes 和 MetaMask 的链接状态,
-        MetaMask 钱包还可以主动切换需要链接的链
         <br />
-        Nufinetes 的优先级是最高的, 也就意味着如果两种钱包同时处于链接状态的话,
-        useWeb3React context 提供的链接器 connector 将是 Nufinetes, 只有
-        Nufinetes 断开, 首选链接器才会变成 MetaMask
+        This example provides two panels to display the linking status of
+        Nufinetes and MetaMask respectively. MetaMask wallet can also actively
+        switch the chain that needs to be connected
+        <br />
+        <br />
+        Nufinetes has the highest priority, which means that if two wallets are
+        connected at the same time, The connector provided by useWeb3React
+        context will be Nufinetes, only Nufinetes is disconnected, the preferred
+        connector will become MetaMask
       </div>
 
       <div
@@ -34,16 +38,21 @@ export default function Home() {
       </div>
 
       <div style={{ fontSize: 18, width: 800, textAlign: "center" }}>
-        在这里演示了一个原生 Web3ReactProvider 的示例
+        An example of a native Web3ReactProvider is demonstrated here
         <br />
-        原生 Web3ReactProvider 提供了 connector, chainId, accounts,
-        isActivating, error, account, isActive, provider 等多个钱包状态或对象,
-        足够满足常规 dapp 需要, 如果有额外需要维护的状态,
-        则可自行在业务中封装一层 provider 进行状态提供,
-        也可以通过其他状态管理工具来维护
-        <br />在 Dapp wallet example 中, 将演示根据业务需要自行封装一层 Provider
-        的案例, 以模拟 Vim Dapp 需要多账户登录以及需要单独获取 token 的业务,{" "}
-        <Link to="/dapp">点击跳转</Link>
+        <br />
+        Native Web3ReactProvider provides connector, chainId, accounts,
+        isActivating, error, account, isActive, provider and other wallet states
+        or variables, it is enough for regular dapp&apos;s business needs, if there
+        is additional state that needs to be maintained, then you can
+        encapsulate a layer of provider in your business to provide status,
+        status can also be maintained by other state management tools
+        <br />
+        <br />
+        In the Dapp wallet example, the demonstration will encapsulate a layer
+        of Provider according to business needs: To simulating Vimworld Dapp
+        requires multi-account login and needs to obtain tokens separately
+        <Link to="/dapp">Go and preview</Link>
       </div>
 
       <ProviderExample />

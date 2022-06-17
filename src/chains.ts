@@ -146,10 +146,8 @@ export const URLS: {[chainId: number]: (string | undefined)[]} = Object.keys(CHA
     [chainId: number]: (string | undefined)[]
 }>((accumulator, chainId) => {
     const validURLs: (string | undefined)[] = CHAINS[Number(chainId)].urls
-    console.log(validURLs, 'check validURLs')
     if (validURLs.length) {
         accumulator[Number(chainId)] = validURLs
     }
-    console.log(accumulator, 'accumulator')
     return accumulator
 }, {})

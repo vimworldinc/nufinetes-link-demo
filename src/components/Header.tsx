@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export default function Header() {
   const { pathname } = window.location;
-  console.log(pathname, "check pathname");
   return (
     <div
       style={{

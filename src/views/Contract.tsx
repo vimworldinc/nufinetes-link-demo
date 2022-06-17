@@ -10,9 +10,10 @@ export default function Home() {
       <Header />
 
       <div style={{ fontSize: 18, width: 800, textAlign: "center" }}>
-        Eth 合约调用
+        Eth Contract Call
         <br />
-        本示例提供了 Kovan 测试网上的余额查询与合约调用
+        This example provides balance query and contract call on the Kovan
+        testnet
       </div>
 
       <div

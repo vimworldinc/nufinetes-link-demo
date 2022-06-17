@@ -10,9 +10,10 @@ export default function Home() {
       <Header />
 
       <div style={{ fontSize: 18, width: 800, textAlign: "center" }}>
-        Vechain 合约调用
+        Vechain Contract Call
         <br />
-        本示例提供了维链测试网上的余额查询与合约调用
+        This example provides balance inquiries and contract calls on the
+        VeChain testnet
       </div>
 
       <div

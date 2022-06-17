@@ -8,10 +8,9 @@ export default function Home() {
       <Header />
 
       <div style={{ fontSize: 18, width: 800, textAlign: 'center' }}>
-        Eth 签名示例
+        Eth Sign Examples
         <br />
-        本示例提供了两个面板用来分别演示 Nufinetes 和 MetaMask 的签名功能, 在钱包地址相同并且签名内容相同的情况下,
-        签名的结果应该都是一致的
+        This example provides two panels to demonstrate the signature function of Nufinetes and MetaMask respectively. When the wallet address is the same and the signature content is the same, the signature results should be consistent
       </div>
 
       <div style={{ display: 'flex', flexFlow: 'wrap', fontFamily: 'sans-serif' }}>
