@@ -6,23 +6,23 @@ This is a collection of demos used to show the usage of Nufinetes-Link sdk, curr
 
 1. Multi wallet connection example and native Web3Provider usage example
 
-![image](./src/static/nufi-1.png)
+![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-1.png)
 
 #### You can connect with multiple wallets including Nufinetes at the same time, and observe the status of the wallet connections through each wallet panel
 
-![image](./src/static/nufi-2.png)
+![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-2.png)
 
 The native Web3Provider provides multiple states for specific business use
 
 2. Extension provider and multi-account login simulation demo
 
-![image](./src/static/nufi-3.png)
+![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-3.png)
 
 #### Simulate the scenario where Vimworld Dapp needs to obtain tokens after connecting the wallet, and simulate the scenario where multiple wallet accounts log in
 
 3. Eth sign example (PersonalSign 和 SignTypedData_v4)
 
-![image](./src/static/nufi-4.png)
+![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-4.png)
 
 #### Show and compare the results of Nufinetes and MetaMask signing while ensuring that the wallet account used to sign is the same
 
@@ -233,4 +233,4 @@ In the example of the Eth contract invocation, we use the Nufinetes-Link provide
 
 ============================================================
 
-If you have any questions, please file an issue here: issue link
+If you have any questions, please file an issue here: [Issue Link](https://github.com/vimworldinc/nufinetes-link-demo/issues)
