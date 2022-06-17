@@ -1,41 +1,54 @@
 # Nufinetes-Link Demo
 
-## Version 1.0
+This is a collection of demos used to showcase the usage of Nufinetes-Link sdk, currently providing 5 different integration scenarios.
 
-This is a collection of demos used to show the usage of Nufinetes-Link sdk, currently provides 5 pages, they are:
+## How to Run Demo Dapp
 
-1. Multi wallet connection example and native Web3Provider usage example
+This demo is a CRA (create-react-app) project, you can start the project with a few simple commands below.
+
+1. Install Dependencies
+
+```bash
+yarn install
+```
+
+2. Run the demo
+
+```bash
+yarn start
+```
+
+## Demo Dapp Example #1: Multi-Wallet Connection
 
 ![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-1.png)
 
-#### You can connect with multiple wallets including Nufinetes at the same time, and observe the status of the wallet connections through each wallet panel
+You can connect with multiple wallets including Nufinetes at the same time, and observe the status of the wallet connections through each wallet panel.
+
+## Demo Dapp Example #2: Native Web3Provider Usage
 
 ![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-2.png)
 
-The native Web3Provider provides multiple states for specific business use
+The native Web3Provider provides multiple states for specific use cases.
 
-2. Extension provider and multi-account login simulation demo
+## Demo Dapp Example #3: Extension Provider and Multi-account Login
 
 ![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-3.png)
 
-#### Simulate the scenario where Vimworld Dapp needs to obtain tokens after connecting the wallet, and simulate the scenario where multiple wallet accounts log in
+Simulate the scenario where Vimworld Dapp needs to obtain tokens after connecting the wallet, and simulate the scenario where multiple wallet accounts log in.
 
-3. Eth sign example (PersonalSign 和 SignTypedData_v4)
+## Demo Dapp Example #4: Ethereum Signing (PersonalSign and SignTypedData_v4)
 
 ![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-4.png)
 
-#### Show and compare the results of Nufinetes and MetaMask signing while ensuring that the wallet account used to sign is the same
+Show and compare the results of Nufinetes and MetaMask signing while ensuring that the signing results are the same from both wallets.
 
-4. Eth kovan testnet contract call
-5. Vechain testnet contract call
+## Dapp Integration #1: Ethereum Contract Call
 
-#### The contract call will be described in detail below
+### Ethereum Contract Call on Kovan Testnet
 
-For how to use Nufinetes-Link, please refer to [Nufinetes-Link](https://github.com/vimworldinc/nufinetes-link)
+For how to use Nufinetes-Link, please refer to [Nufinetes-Link](https://github.com/vimworldinc/nufinetes-link).
 
-Here we will introduce the usage methods related to contract calls under the Eth Kovan testnet and Vechain testnet
-
-## Eth Contract Call
+Here we will introduce the usage methods related to contract calls under the Ethereum Kovan testnet.
 
 ### Get native token balance
 
@@ -62,7 +75,7 @@ const getNativeTokenBalance = async (account, provider): Promise<number> => {
 };
 ```
 
-### Get Erc20 token balance and approve amount
+### Get ERC-20 token balance and approve amount
 
 ```jsx
 const accounts = useAccounts();
@@ -98,13 +111,15 @@ const getApprove = async () => {
 };
 ```
 
-As shown above, you can use the provider provided by Nufinetes-Link as a full-featured web3 provider, and then the operation of related contracts is no different from when you use the web3 provider provided by MetaMask or other evm-compatible wallets.
+As shown above, you can use the provider provided by Nufinetes-Link as a full-featured web3 provider, and then the operation of related contracts is no different from when you use the web3 provider provided by MetaMask or other EVM-compatible wallets.
 
-However, the provider provided by Nufinetes-Link is not only a web3-provider, but also an instance of Wallet Connect connection. Next, we will introduce the features of this part
+However, the provider offered by Nufinetes-Link is not only a web3-provider, but also an instance of a WalletConnect connection. In the next integration section, we will introduce the features using a WalletConnect session.
 
-## Vechain Contract Call
+## Dapp Integration #2: Vechain Contract Call
 
-Under Vechain, we need to use connex for contract interaction
+### Vechain Contract Call on Testnet
+
+Under Vechain, we need to use connex for contract interaction:
 
 ```jsx
 import Connex from "@vechain/connex";
@@ -116,7 +131,7 @@ const connex = new Connex({
 });
 ```
 
-### Get balance of Veed
+### Get balance of VEED (VIP-180 token)
 
 ```jsx
   // We will use Veed contract in this example, the Veed contract we used here is a Vip180 contract, just like an Erc20 contract on Eth chain
@@ -146,9 +161,9 @@ const connex = new Connex({
    }
 ```
 
-As shown above, we only need the account field provided by Nufinetes-Link to pass in the relevant contract instance to call, and the next contract transfer request will be slightly different
+As shown above, we only need the account field provided by Nufinetes-Link to pass in the relevant contract instance to call, and the next contract transfer request example below will be slightly different.
 
-### Transfer veed to a target account
+### Transfer VEED to a target account
 
 ```jsx
 const transferVeed = async () => {
@@ -198,7 +213,7 @@ const transferVeed = async () => {
 };
 ```
 
-the contractRequest function will use the Nufinetes-Link provider to make a contract call on Nufinetes
+The contractRequest function will use the Nufinetes-Link provider to make a contract call on Nufinetes.
 
 ```jsx
   const contractRequest = async (params): Promise<{ txid: string }> => {
@@ -229,8 +244,8 @@ the contractRequest function will use the Nufinetes-Link provider to make a cont
   };
 ```
 
-In the example of the Eth contract invocation, we use the Nufinetes-Link provider as a standard web3 provider. In the Vechain contract invocation, we can directly treat the Nufinetes-Link provider as a WalletConnect instance to use its methods
+During the previous examples of Ethereum contract invocation, we use the Nufinetes-Link provider as a standard web3 provider. In the Vechain contract invocation, we can directly treat the Nufinetes-Link provider as a WalletConnect instance to use its methods.
 
-============================================================
+## Issues and Concerns
 
-If you have any questions, please file an issue here: [Issue Link](https://github.com/vimworldinc/nufinetes-link-demo/issues)
+If you have any questions, please [file an issue here](https://github.com/vimworldinc/nufinetes-link-demo/issues).
