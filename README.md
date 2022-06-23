@@ -18,6 +18,10 @@ yarn install
 yarn start
 ```
 
+## Online demo preview
+
+[https://vimworldinc.github.io/nufinetes-link-demo/](https://vimworldinc.github.io/nufinetes-link-demo/)
+
 ## Demo Dapp Example #1: Multi-Wallet Connection
 
 ![image](https://github.com/vimworldinc/nufinetes-link-demo/blob/main/src/static/nufi-1.png)
@@ -49,6 +53,8 @@ Show and compare the results of Nufinetes and MetaMask signing while ensuring th
 For how to use Nufinetes-Link, please refer to [Nufinetes-Link](https://github.com/vimworldinc/nufinetes-link).
 
 Here we will introduce the usage methods related to contract calls under the Ethereum Kovan testnet.
+
+P.S. As long as it is an EVM-compatible chain (such as BNB chain), you can almost refer to the examples below.
 
 ### Get native token balance
 
