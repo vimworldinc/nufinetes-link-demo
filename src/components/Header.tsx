@@ -1,9 +1,15 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Header() {
   const { pathname } = window.location;
-  
+  const rawPathname = useMemo(() => {
+    if (pathname.includes("/nufinetes-link-demo/")) {
+      return pathname.replace("/nufinetes-link-demo", "");
+    }
+    return pathname;
+  }, [pathname]);
   return (
     <div
       style={{
@@ -18,23 +24,23 @@ export default function Header() {
         flexWrap: "wrap",
       }}
     >
-      <HeaderLink className={pathname === "/" ? "active" : ""}>
+      <HeaderLink className={rawPathname === "/" ? "active" : ""}>
         <Link to="/">Multi wallet example</Link>
       </HeaderLink>
 
-      <HeaderLink className={pathname === "/dapp" ? "active" : ""}>
+      <HeaderLink className={rawPathname === "/dapp" ? "active" : ""}>
         <Link to="/dapp">Dapp wallet example</Link>
       </HeaderLink>
 
-      <HeaderLink className={pathname === "/eth-sign" ? "active" : ""}>
+      <HeaderLink className={rawPathname === "/eth-sign" ? "active" : ""}>
         <Link to="/eth-sign">Ethereum Sign example</Link>
       </HeaderLink>
 
-      <HeaderLink className={pathname === "/contract" ? "active" : ""}>
+      <HeaderLink className={rawPathname === "/contract" ? "active" : ""}>
         <Link to="/contract">Eth Contract call example</Link>
       </HeaderLink>
 
-      <HeaderLink className={pathname === "/vechain" ? "active" : ""}>
+      <HeaderLink className={rawPathname === "/vechain" ? "active" : ""}>
         <Link to="/vechain">Vechain Contract call example</Link>
       </HeaderLink>
     </div>
