@@ -9,6 +9,7 @@
   ],
   "version": "0.1.0",
   "author": "Spike Wang <spike.wang@vimworld.com>",
+  "homepage": "https://vimworld.github.io/nufinetes-link-demo",
   "private": true,
   "dependencies": {
     "@ethersproject/bignumber": "^5.6.0",

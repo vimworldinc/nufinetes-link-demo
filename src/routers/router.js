@@ -10,9 +10,8 @@ import Vechain from "../views/Vechain";
 export default () => {
   return (
     <Suspense fallback={<>loading</>}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route index element={<Index />} />
           <Route path="/" element={<Index />} />
           <Route path="/dapp" element={<Dapp />} />
           <Route path="/eth-sign" element={<EthSign />} />
