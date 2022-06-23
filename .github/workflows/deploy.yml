@@ -3,13 +3,13 @@ name: Publish to Github Pages
 on:
   push:
     branches:
-      - feat_ci
+      - main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@feat_ci
+      - uses: actions/checkout@main
 
       # 安装依赖
       - run: npm install --legacy-peer-deps
