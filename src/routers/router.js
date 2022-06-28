@@ -6,6 +6,7 @@ import Dapp from "../views/Dapp";
 import EthSign from "../views/EthSign";
 import Contract from "../views/Contract";
 import Vechain from "../views/Vechain";
+import Bnb from "../views/Bnb";
 
 export default () => {
   return (
@@ -17,6 +18,7 @@ export default () => {
           <Route path="/eth-sign" element={<EthSign />} />
           <Route path="/contract" element={<Contract />} />
           <Route path="/vechain" element={<Vechain />} />
+          <Route path="/bnb" element={<Bnb />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

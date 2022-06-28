@@ -10,5 +10,5 @@ export const [nufinetes, hooks] = initializeConnector<NufinetesConnector>(
         return accumulator;
       }, {}),
     }),
-  [1, 2, 3, 4, 42, 818000000, 818000001]
+  [1, 2, 3, 4, 42, 56, 97, 818000000, 818000001]
 );
