@@ -43,6 +43,10 @@ export default function Header() {
       <HeaderLink className={rawPathname === "/vechain" ? "active" : ""}>
         <Link to="/vechain">Vechain Contract call example</Link>
       </HeaderLink>
+
+      <HeaderLink className={rawPathname === "/bnb" ? "active" : ""}>
+        <Link to="/bnb">Bnb Contract call example</Link>
+      </HeaderLink>
     </div>
   );
 }

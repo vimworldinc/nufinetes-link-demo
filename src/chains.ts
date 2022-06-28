@@ -12,6 +12,12 @@ const MATIC: AddEthereumChainParameter['nativeCurrency'] = {
     decimals: 18,
 }
 
+const BNB: AddEthereumChainParameter['nativeCurrency'] = {
+    name: 'bnb',
+    symbol: 'BNB',
+    decimals: 18,
+  }
+
 interface BasicChainInformation {
     urls: (string | undefined)[]
     name: string
@@ -102,6 +108,12 @@ export const CHAINS: {
         name: 'Optimism Kovan',
         nativeCurrency: ETH,
         blockExplorerUrls: ['https://kovan-optimistic.etherscan.io'],
+    },
+    97: {
+      urls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+      name: 'BSC test Chain',
+      nativeCurrency: BNB,
+      blockExplorerUrls: ['https://testnet.bscscan.com/tx/'],
     },
     // Arbitrum
     42161: {
