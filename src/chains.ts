@@ -109,11 +109,17 @@ export const CHAINS: {
         nativeCurrency: ETH,
         blockExplorerUrls: ['https://kovan-optimistic.etherscan.io'],
     },
+    56: {
+      urls: ['https://bsc-dataseed1.binance.org'],
+      name: 'Binance Smart Chain',
+      nativeCurrency: BNB,
+      blockExplorerUrls: ['https://bscscan.com'],
+    },
     97: {
       urls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
-      name: 'BSC test Chain',
+      name: 'BSC Testnet',
       nativeCurrency: BNB,
-      blockExplorerUrls: ['https://testnet.bscscan.com/tx/'],
+      blockExplorerUrls: ['https://testnet.bscscan.com'],
     },
     // Arbitrum
     42161: {
