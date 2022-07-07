@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { hooks, nufinetes } from "../../connectors/nufinetes";
 import { Accounts } from "../Accounts";
 import { Card } from "../Card";
@@ -38,6 +38,7 @@ export default function NefinetesCard() {
   const [amountValue, setAmountValue] = useState("");
   const [address, setAddress] = useState("");
   const [txHash, setTxHash] = useState("");
+  const sessionIdRef = useRef(1);
   // const ENSNames = useENSNames(provider)
   // attempt to connect eagerly on mount
   // console.log(nufinetes.provider.uri)
@@ -71,7 +72,7 @@ export default function NefinetesCard() {
     console.log({ clauseList, str: JSON.stringify(clauseList) });
     try {
       const transferTokenJSON = {
-        id: 1,
+        id: sessionIdRef.current,
         jsonrpc: "2.0",
         method: "vechain_transaction",
         params: [
@@ -83,8 +84,8 @@ export default function NefinetesCard() {
           },
         ],
       };
+      sessionIdRef.current++;
       const res = await (provider as any).sendCustomRequest(transferTokenJSON);
-      console.log({ signRes: res });
       return res;
     } catch (error) {
       console.log({ sendCustomRequest: error.message });
