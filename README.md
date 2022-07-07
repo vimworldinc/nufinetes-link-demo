@@ -252,11 +252,11 @@ The contractRequest function will use the Nufinetes-Link provider to make a cont
 
 During the previous examples of Ethereum contract invocation, we use the Nufinetes-Link provider as a standard web3 provider. In the Vechain contract invocation, we can directly treat the Nufinetes-Link provider as a WalletConnect instance to use its methods.
 
-## Dapp Integration #3: Bnb Contract Call
+## Dapp Integration #3: BNB (Binance Smart Chain) Contract Call
 
-Contract calls under the Bnb network are basically the same as eth because they are both evm compatible chains.
+Contract calls under the BNB network are basically the same as ETH because they are both EVM-compatible chains.
 
-The only difference in the bnb example is in the contract invocation part: we use web3-provider-engine to generate a signer for the ethers contract instance to use.
+The only difference in the BNB example is in the contract invocation part: we use web3-provider-engine to generate a signer for the ethers contract instance to use.
 
 The reason why this example is provided is because we know that the sdk used by some projects uses related libraries. We use this example to show that these libraries are available to each other.
 
