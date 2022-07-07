@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/nufinetes-link-demo/static/css/main.a617e044.chunk.css",
-    "main.js": "/nufinetes-link-demo/static/js/main.f2bd857f.chunk.js",
-    "main.js.map": "/nufinetes-link-demo/static/js/main.f2bd857f.chunk.js.map",
+    "main.js": "/nufinetes-link-demo/static/js/main.23889aa0.chunk.js",
+    "main.js.map": "/nufinetes-link-demo/static/js/main.23889aa0.chunk.js.map",
     "runtime-main.js": "/nufinetes-link-demo/static/js/runtime-main.ac5bce4d.js",
     "runtime-main.js.map": "/nufinetes-link-demo/static/js/runtime-main.ac5bce4d.js.map",
     "static/js/2.a9cd1d68.chunk.js": "/nufinetes-link-demo/static/js/2.a9cd1d68.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ac5bce4d.js",
     "static/js/2.a9cd1d68.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.f2bd857f.chunk.js"
+    "static/js/main.23889aa0.chunk.js"
   ]
 }
