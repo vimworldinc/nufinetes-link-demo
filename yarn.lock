@@ -2861,10 +2861,10 @@
     uuid "2.0.1"
     xmlhttprequest "1.8.0"
 
-"@vimworld/nufinetes-link@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.npmjs.org/@vimworld/nufinetes-link/-/nufinetes-link-0.1.3.tgz#c600fb89b22f4643e9f45ffa7b1f14817a3beaee"
-  integrity sha512-UtTPG4aR3Wj4Qk1sfizKekUse8LGV8xj7MTnaDML+O/a+657bFJG4JZbMR74cBa3SGGSZXQcG+G7PKVitazlOQ==
+"@vimworld/nufinetes-link@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.npmjs.org/@vimworld/nufinetes-link/-/nufinetes-link-0.1.6.tgz#71aafd1681d2efe36718b59e473240bf9e0c85e1"
+  integrity sha512-wadZAY1vDtTpdBrVhrPaJ9HexL2rnCo+/UOx3QauCMCEBGaHmkL/2hx7RAbqb4H0O14vL/sq1qk2R0m1qAlVHQ==
   dependencies:
     "@ethersproject/providers" "^5"
     "@walletconnect/legacy-types" "^2.0.0-beta.26"
