@@ -26,7 +26,7 @@
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@vechain/connex": "^2.0.9",
-    "@vimworld/nufinetes-link": "^0.1.13",
+    "@vimworld/nufinetes-link": "^0.1.12",
     "@walletconnect/client": "^1.7.8",
     "@walletconnect/ethereum-provider": "^1.7.8",
     "@web3-react/coinbase-wallet": "8.0.27-beta.0",
