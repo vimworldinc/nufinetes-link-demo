@@ -5,17 +5,17 @@
     "main.js.map": "/nufinetes-link-demo/static/js/main.b947e88c.chunk.js.map",
     "runtime-main.js": "/nufinetes-link-demo/static/js/runtime-main.3a3f2572.js",
     "runtime-main.js.map": "/nufinetes-link-demo/static/js/runtime-main.3a3f2572.js.map",
-    "static/js/2.3ff43e59.chunk.js": "/nufinetes-link-demo/static/js/2.3ff43e59.chunk.js",
-    "static/js/2.3ff43e59.chunk.js.map": "/nufinetes-link-demo/static/js/2.3ff43e59.chunk.js.map",
+    "static/js/2.ae421d2c.chunk.js": "/nufinetes-link-demo/static/js/2.ae421d2c.chunk.js",
+    "static/js/2.ae421d2c.chunk.js.map": "/nufinetes-link-demo/static/js/2.ae421d2c.chunk.js.map",
     "static/js/3.41ba29c7.chunk.js": "/nufinetes-link-demo/static/js/3.41ba29c7.chunk.js",
     "static/js/3.41ba29c7.chunk.js.map": "/nufinetes-link-demo/static/js/3.41ba29c7.chunk.js.map",
     "index.html": "/nufinetes-link-demo/index.html",
     "static/css/main.a617e044.chunk.css.map": "/nufinetes-link-demo/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.3ff43e59.chunk.js.LICENSE.txt": "/nufinetes-link-demo/static/js/2.3ff43e59.chunk.js.LICENSE.txt"
+    "static/js/2.ae421d2c.chunk.js.LICENSE.txt": "/nufinetes-link-demo/static/js/2.ae421d2c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3a3f2572.js",
-    "static/js/2.3ff43e59.chunk.js",
+    "static/js/2.ae421d2c.chunk.js",
     "static/css/main.a617e044.chunk.css",
     "static/js/main.b947e88c.chunk.js"
   ]
