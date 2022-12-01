@@ -70,6 +70,7 @@ export default function NefinetesCard() {
       />
       <button onClick={() => console.log(provider, nufinetes.customProvider)}>Check provider</button>
       <button onClick={handleSendRequest}>SIGN</button>
+      <a target="_blank" rel="noreferrer" href="https://apple.vimworld.org/wc">Universal Link</a>
     </Card>
   )
 }
